@@ -36,7 +36,7 @@ Route::post('/upload', function (Request $request) {
         $filePath = 'images/' . $name;
         Storage::disk('s3')->put($filePath, file_get_contents($file));
         Storage::disk('s3')->setVisibility($filePath, 'public');
-        return response()->json(['url' => env('AWS_BUCKET_URL').$filePath], Response::HTTP_UNPROCESSABLE_ENTITY);
+        return response()->json(['url' => env('AWS_BUCKET_URL').$filePath], Response::HTTP_OK);
     }
     return response()->json(['message' => 'Bad Request'], Response::HTTP_BAD_REQUEST);
 
